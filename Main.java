@@ -112,8 +112,7 @@ class Main {
         if (choice == 'y' || choice == 'Y') {
             System.out.print("\nEnter the string: ");
             String string = sc.next();
-            int m = string.length();
-
+    
             System.out.println("\n--------------------------");
             System.out.println("Include String --> ");
             System.out.println("--------------------------");
