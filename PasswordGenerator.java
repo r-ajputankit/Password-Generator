@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import java.util.Random;
 
-class Main {
+class PasswordGenerator {
     Random random = new Random();
     Scanner sc = new Scanner(System.in);
 
@@ -71,7 +71,7 @@ class Main {
         Scanner sc = new Scanner(System.in);
 
         Random random = new Random();
-        Main ob = new Main();
+        PasswordGenerator ob = new PasswordGenerator();
         String password = "";
 
         System.out.println("--------------------------------------------------------");
