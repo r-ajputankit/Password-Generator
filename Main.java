@@ -10,6 +10,15 @@ class Main {
         return p;
     }
 
+    void display(String str, String pass, int key){
+        if(key==1){
+            System.out.println(str+pass);
+        }
+        else if(key==2){
+            System.out.println(pass+str);
+        }
+    }
+
     char includeChar() {
         int n = random.nextInt(2);
         if (n == 0) {
@@ -18,8 +27,10 @@ class Main {
         return (char) (random.nextInt(10) + 97);
     }
 
-    String charOfChoice(int m) {
+
+    void charOfChoice(String str, int nPass,int key) {
         // m is the length of the string to be include.
+        int m = str.length();
         String pass = "";
         System.out.print("\nEnter the length of password: ");
         int num = sc.nextInt();
@@ -36,12 +47,23 @@ class Main {
             for (int i = 0; i < n; i++) {
                 characters[i] = sc.next().charAt(0);
             }
-            for (int i = 0; i < num - m; i++) {
-                pass += fromArray(characters, n);
+            System.out.println("\npassword Generated: ");
+            System.out.println("--------------------------------");
+            for (int i = 0; i < nPass; i++) {
+                for (int j = 0; j < num - m; j++) {
+                    pass += fromArray(characters, n);
+                }
+                display(str, pass, key);
+                pass = "";
             }
-            return pass;
+            System.out.println("--------------------------------\n\n");
         } else {
-            return generatePassword(num, m);
+            System.out.println("password Generated: ");
+            System.out.println("--------------------------------");
+            for(int i=0; i<nPass; i++){
+                display(str,generatePassword(num, m),key);
+            }
+            System.out.println("--------------------------------\n\n");
             // num--> length of password
             // m ---> length of the string
         }
@@ -69,11 +91,14 @@ class Main {
     }
 
     public static void main(String[] args) throws InterruptedException {
+        Scanner sc = new Scanner(System.in);
+        Main ob = new Main();
 
         System.out.println("\n_______We are about to geberate a strong password_______\n");
-        Scanner sc = new Scanner(System.in);
 
-        Main ob = new Main();
+        System.out.print("Number of passwords to be generated: ");
+        int n = sc.nextInt();
+
         String password = "";
 
         System.out.println("--------------------------------------------------------");
@@ -96,21 +121,28 @@ class Main {
             System.out.println("----------------------------------------------");
 
             System.out.print("Choice: ");
-            int choic = sc.nextInt();
+            int ch = sc.nextInt();
 
-            switch (choic) {
+            switch (ch) {
                 case 1:
-                    password = string + ob.charOfChoice(m);
+                    ob.charOfChoice(string, n, 1);
                     break;
 
                 case 2:
-                    password = ob.charOfChoice(m) + string;
+                    ob.charOfChoice(string,n,2);
                     break;
 
                 case 3:
                     System.out.print("Enter the length of password: ");
                     int num = sc.nextInt();
-                    password += ob.generatePassword(num, 0);
+                    System.out.println("\nPasswords Generated: ");
+                    System.out.println("--------------------------------");
+                    for(int i=0; i<n; i++){
+                        password += ob.generatePassword(num, 0);
+                        System.out.println(password);
+                        password="";
+                    }
+                    System.out.println("--------------------------------\n");
                     break;
 
                 default:
@@ -121,15 +153,18 @@ class Main {
         } else {
             System.out.print("Enter the length of the password: ");
             int num = sc.nextInt();
-            System.out.println("\nGenerating a Random Password........");
+            System.out.println("\nGenerating Random Password...");
             Thread.sleep(1000);
-            password += ob.includeChar();
-            password += ob.generatePassword(num-1, 0);
+            System.out.println("\nPasswords Generated: ");
+            System.out.println("--------------------------------");
+            for(int i=0; i<n; i++){
+                password += ob.includeChar();
+                password += ob.generatePassword(num - 1, 0);
+                System.out.println(password);
+                password="";
+            }
+            System.out.println("--------------------------------\n\n");
         }
         sc.close();
-
-        System.out.println("----------------------------------");
-        System.out.println("password Gerenated---> " + password);
-        System.out.println("----------------------------------");
     }
 }
