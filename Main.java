@@ -36,7 +36,7 @@ class Main {
             for (int i = 0; i < n; i++) {
                 characters[i] = sc.next().charAt(0);
             }
-            for (int i = 0; i < num-m; i++) {
+            for (int i = 0; i < num - m; i++) {
                 pass += fromArray(characters, n);
             }
             return pass;
@@ -55,11 +55,14 @@ class Main {
     String generatePassword(int n, int m) {
         String pass = "";
         for (int i = 0; i < n - m; i++) {
-            int a = random.nextInt(2);
+            int a = random.nextInt(3);
             if (a == 0) {
                 pass += includeInt();
-            } else {
+            } else if (a == 1) {
                 pass += includeChar();
+            } else {
+                char[] arr = { '!', '@', '#', '$', '%', '^', '&', '*', '<', '(', ')', '+', '-', '_', '|', '/' };
+                pass += fromArray(arr, arr.length);
             }
         }
         return pass;
@@ -70,7 +73,6 @@ class Main {
         System.out.println("\n_______We are about to geberate a strong password_______\n");
         Scanner sc = new Scanner(System.in);
 
-        Random random = new Random();
         Main ob = new Main();
         String password = "";
 
@@ -106,7 +108,7 @@ class Main {
                     break;
 
                 case 3:
-                    System.out.println("Enter the length of password: ");
+                    System.out.print("Enter the length of password: ");
                     int num = sc.nextInt();
                     password += ob.generatePassword(num, 0);
                     break;
@@ -119,23 +121,15 @@ class Main {
         } else {
             System.out.print("Enter the length of the password: ");
             int num = sc.nextInt();
-            System.out.println("Generating a Random Password........");
+            System.out.println("\nGenerating a Random Password........");
             Thread.sleep(1000);
             password += ob.includeChar();
-            for (int i = 0; i < num - 1; i++) {
-                int m = random.nextInt(3);
-                if (m == 0) {
-                    password += ob.includeInt();
-                } else {
-                    password += ob.includeChar();
-                }
-            }
+            password += ob.generatePassword(num-1, 0);
         }
         sc.close();
 
         System.out.println("----------------------------------");
-        System.out.println("Generated password---> " + password);
+        System.out.println("password Gerenated---> " + password);
         System.out.println("----------------------------------");
-
     }
 }
