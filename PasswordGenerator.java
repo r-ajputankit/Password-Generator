@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import java.util.Random;
 
-class Main {
+class PasswordGenerator {
     Random random = new Random();
     Scanner sc = new Scanner(System.in);
 
@@ -92,7 +92,7 @@ class Main {
 
     public static void main(String[] args) throws InterruptedException {
         Scanner sc = new Scanner(System.in);
-        Main ob = new Main();
+        PasswordGenerator ob = new PasswordGenerator();
 
         System.out.println("\n_______We are about to geberate a strong password_______\n");
 
